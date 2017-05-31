@@ -1087,7 +1087,7 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
 
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {
-    int64 nSubsidy = 50 * COIN;
+    int64 nSubsidy = 1000000 * COIN;
 
     // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
     nSubsidy >>= (nHeight / 840000); // Bolivarcoin: 840k blocks in ~4 years
@@ -1095,8 +1095,8 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     return nSubsidy + nFees;
 }
 
-static const int64 nTargetTimespan = 10 * 30; // Bolivarcoin: 5 minutes
-static const int64 nTargetSpacing = 1 * 30; // Bolivarcoin: 30 seconds
+static const int64 nTargetTimespan = 1 * 24 * 60 * 60; // 1 day to set difficulty
+static const int64 nTargetSpacing = 1; // Bolivarcoin: Generate 1m coins per second, this is for premine
 static const int64 nInterval = nTargetTimespan / nTargetSpacing;
 
 //
@@ -2791,13 +2791,13 @@ bool InitBlockIndex() {
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1495734125;
+        block.nTime    = 1496195749;
         block.nBits    = 0x1e0ffff0;
         block.nNonce   = 0;
 
         if (fTestNet)
         {
-            block.nTime    = 1495734125;
+            block.nTime    = 1496195749;
             block.nNonce   = 0;
         }
 
